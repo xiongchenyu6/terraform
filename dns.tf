@@ -3,7 +3,7 @@
 resource "cloudflare_record" "frp_dashboard" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "frp-dashboard"
-  content = var.home_ip
+  content = var.oracle_arm_001_ip  # oracle-arm-001
   type    = "A"
   ttl     = 1
   proxied = false
@@ -16,7 +16,7 @@ resource "cloudflare_record" "frp_dashboard" {
 resource "cloudflare_record" "mainpage" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "autolife-robotics.me"
-  content = var.home_ip
+  content = var.oracle_arm_001_ip  # oracle-arm-001
   type    = "A"
   ttl     = 1
   proxied = true
@@ -29,7 +29,7 @@ resource "cloudflare_record" "mainpage" {
 resource "cloudflare_record" "mngt" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "mngt"
-  content = var.home_ip
+  content = var.oracle_arm_001_ip  # oracle-arm-001
   type    = "A"
   ttl     = 1
   proxied = false
@@ -42,7 +42,7 @@ resource "cloudflare_record" "mngt" {
 resource "cloudflare_record" "netbird" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "netbird"
-  content = var.home_ip
+  content = var.oracle_arm_001_ip  # oracle-arm-001
   type    = "A"
   ttl     = 1
   proxied = false
@@ -55,7 +55,7 @@ resource "cloudflare_record" "netbird" {
 resource "cloudflare_record" "rust_server" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "rust-server"
-  content = var.home_ip
+  content = var.oracle_arm_001_ip  # oracle-arm-001
   type    = "A"
   ttl     = 1
   proxied = false
@@ -68,7 +68,7 @@ resource "cloudflare_record" "rust_server" {
 resource "cloudflare_record" "vr_sg" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "vr-sg"
-  content = var.home_ip
+  content = var.oracle_arm_001_ip  # oracle-arm-001
   type    = "A"
   ttl     = 1
   proxied = false
@@ -81,7 +81,7 @@ resource "cloudflare_record" "vr_sg" {
 resource "cloudflare_record" "api" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "api"
-  content = var.home_ip
+  content = var.oracle_arm_001_ip  # oracle-arm-001
   type    = "A"
   ttl     = 1
   proxied = false
@@ -91,11 +91,23 @@ resource "cloudflare_record" "api" {
   }
 }
 
-resource "cloudflare_record" "freeman_cname" {
+resource "cloudflare_record" "odoo" {
   zone_id = cloudflare_zone.autolife_ai.id
-  name    = "freeman"
-  content = "cname.vercel-dns.com"
-  type    = "CNAME"
+  name    = "odoo"
+  content = var.oracle_arm_001_ip  # oracle-arm-001
+  type    = "A"
+  ttl     = 1
+  proxied = false
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+resource "cloudflare_record" "casdoor" {
+  zone_id = cloudflare_zone.autolife_ai.id
+  name    = "casdoor"
+  content = var.oracle_amd_001_ip  # oracle-arm-001
+  type    = "A"
   ttl     = 1
   proxied = false
 
@@ -104,10 +116,10 @@ resource "cloudflare_record" "freeman_cname" {
   }
 }
 
-resource "cloudflare_record" "kanidm" {
-  zone_id = cloudflare_zone.autolife_ai.id
-  name    = "kanidm"
-  content = var.kanidm_ip
+resource "cloudflare_record" "Hashtopolis" {
+  zone_id = cloudflare_zone.xiongchenyu_dpdns_org.id
+  name    = "hashtopolis"
+  content = var.oracle_arm_002_ip
   type    = "A"
   ttl     = 1
   proxied = false
