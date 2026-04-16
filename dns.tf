@@ -157,3 +157,131 @@ resource "cloudflare_record" "sub2api" {
     create_before_destroy = true
   }
 }
+
+# Lark/Feishu mail setup for alias.autolife.ai
+resource "cloudflare_record" "alias_lark_verification" {
+  zone_id = cloudflare_zone.autolife_ai.id
+  name    = "alias"
+  content = "verification-code-site-App_lark=ZKksFWSiBzGrRTliptvK"
+  type    = "TXT"
+  ttl     = 600
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_record" "alias_lark_spf" {
+  zone_id = cloudflare_zone.autolife_ai.id
+  name    = "alias"
+  content = "v=spf1 +include:spf.onlarksuite.com -all"
+  type    = "TXT"
+  ttl     = 600
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_record" "alias_lark_mx1" {
+  zone_id  = cloudflare_zone.autolife_ai.id
+  name     = "alias"
+  content  = "mx1.larksuite.com"
+  type     = "MX"
+  priority = 1
+  ttl      = 600
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_record" "alias_lark_mx2" {
+  zone_id  = cloudflare_zone.autolife_ai.id
+  name     = "alias"
+  content  = "mx2.larksuite.com"
+  type     = "MX"
+  priority = 5
+  ttl      = 600
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_record" "alias_lark_mx3" {
+  zone_id  = cloudflare_zone.autolife_ai.id
+  name     = "alias"
+  content  = "mx3.larksuite.com"
+  type     = "MX"
+  priority = 10
+  ttl      = 600
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# Feishu mail setup for autolife.ai (apex)
+resource "cloudflare_record" "autolife_feishu_verification" {
+  zone_id = cloudflare_zone.autolife_ai.id
+  name    = "@"
+  content = "verification-code-site-App_feishu=rzDaOnDkZK4HUymRAE32"
+  type    = "TXT"
+  ttl     = 600
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_record" "autolife_feishu_spf" {
+  zone_id = cloudflare_zone.autolife_ai.id
+  name    = "@"
+  content = "v=spf1 +include:_netblocks.m.feishu.cn -all"
+  type    = "TXT"
+  ttl     = 600
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_record" "autolife_feishu_mx1" {
+  zone_id  = cloudflare_zone.autolife_ai.id
+  name     = "@"
+  content  = "mx1.feishu.cn"
+  type     = "MX"
+  priority = 1
+  ttl      = 600
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_record" "autolife_feishu_mx2" {
+  zone_id  = cloudflare_zone.autolife_ai.id
+  name     = "@"
+  content  = "mx2.feishu.cn"
+  type     = "MX"
+  priority = 5
+  ttl      = 600
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_record" "autolife_feishu_mx3" {
+  zone_id  = cloudflare_zone.autolife_ai.id
+  name     = "@"
+  content  = "mx3.feishu.cn"
+  type     = "MX"
+  priority = 10
+  ttl      = 600
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}

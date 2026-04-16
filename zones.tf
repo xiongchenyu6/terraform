@@ -12,3 +12,8 @@ resource "cloudflare_zone" "xiongchenyu_dpdns_org" {
   account_id = var.cloudflare_account_id
   zone       = "xiongchenyu.dpdns.org"
 }
+
+resource "cloudflare_zone" "lovai_eu_org" {
+  account_id = var.cloudflare_account_id
+  zone       = "lovai.eu.org"
+}
