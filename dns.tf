@@ -109,7 +109,7 @@ resource "cloudflare_record" "casdoor" {
   content = var.oracle_amd_001_ip  # oracle-arm-001
   type    = "A"
   ttl     = 1
-  proxied = false
+  proxied = true
 
   lifecycle {
     create_before_destroy = true
@@ -123,7 +123,7 @@ resource "cloudflare_record" "casibase" {
   content = var.oracle_amd_001_ip  # oracle-arm-001
   type    = "A"
   ttl     = 1
-  proxied = false
+  proxied = true
 
   lifecycle {
     create_before_destroy = true
@@ -137,7 +137,7 @@ resource "cloudflare_record" "Hashtopolis" {
   content = var.oracle_arm_002_ip
   type    = "A"
   ttl     = 1
-  proxied = false
+  proxied = true
 
   lifecycle {
     create_before_destroy = true
@@ -150,7 +150,7 @@ resource "cloudflare_record" "api_arm_002" {
   content = var.oracle_arm_002_ip
   type    = "A"
   ttl     = 1
-  proxied = false
+  proxied = true
 
   lifecycle {
     create_before_destroy = true
@@ -160,6 +160,22 @@ resource "cloudflare_record" "api_arm_002" {
 resource "cloudflare_record" "auth_arm_002" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "auth"
+  content = var.oracle_arm_002_ip
+  type    = "A"
+  ttl     = 1
+  proxied = true
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# DNS-only record for direct PostgreSQL access (port 5432). Cloudflare's
+# proxy only tunnels HTTP/HTTPS on Free/Pro, so `quant` users connect here
+# rather than the proxied `api` subdomain.
+resource "cloudflare_record" "db_arm_002" {
+  zone_id = cloudflare_zone.panda_qzz_io.id
+  name    = "db"
   content = var.oracle_arm_002_ip
   type    = "A"
   ttl     = 1
@@ -177,7 +193,7 @@ resource "cloudflare_record" "sub2api" {
   content = var.oracle_amd_002_ip
   type    = "A"
   ttl     = 1
-  proxied = false
+  proxied = true
 
   lifecycle {
     create_before_destroy = true
