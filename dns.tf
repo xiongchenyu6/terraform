@@ -144,6 +144,32 @@ resource "cloudflare_record" "Hashtopolis" {
   }
 }
 
+resource "cloudflare_record" "api_arm_002" {
+  zone_id = cloudflare_zone.xiongchenyu_dpdns_org.id
+  name    = "api"
+  content = var.oracle_arm_002_ip
+  type    = "A"
+  ttl     = 1
+  proxied = false
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_record" "auth_arm_002" {
+  zone_id = cloudflare_zone.xiongchenyu_dpdns_org.id
+  name    = "auth"
+  content = var.oracle_arm_002_ip
+  type    = "A"
+  ttl     = 1
+  proxied = false
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 
 resource "cloudflare_record" "sub2api" {
   zone_id = cloudflare_zone.xiongchenyu_dpdns_org.id
