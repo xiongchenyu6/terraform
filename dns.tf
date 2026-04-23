@@ -104,7 +104,7 @@ resource "cloudflare_record" "odoo" {
   }
 }
 resource "cloudflare_record" "casdoor" {
-  zone_id = cloudflare_zone.xiongchenyu_dpdns_org.id
+  zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "casdoor"
   content = var.oracle_amd_001_ip  # oracle-arm-001
   type    = "A"
@@ -118,7 +118,7 @@ resource "cloudflare_record" "casdoor" {
 
 
 resource "cloudflare_record" "casibase" {
-  zone_id = cloudflare_zone.xiongchenyu_dpdns_org.id
+  zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "casibase"
   content = var.oracle_amd_001_ip  # oracle-arm-001
   type    = "A"
@@ -132,7 +132,7 @@ resource "cloudflare_record" "casibase" {
 
 resource "cloudflare_record" "Hashtopolis" {
 
-  zone_id = cloudflare_zone.xiongchenyu_dpdns_org.id
+  zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "hashtopolis"
   content = var.oracle_arm_002_ip
   type    = "A"
@@ -145,7 +145,7 @@ resource "cloudflare_record" "Hashtopolis" {
 }
 
 resource "cloudflare_record" "api_arm_002" {
-  zone_id = cloudflare_zone.xiongchenyu_dpdns_org.id
+  zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "api"
   content = var.oracle_arm_002_ip
   type    = "A"
@@ -158,7 +158,7 @@ resource "cloudflare_record" "api_arm_002" {
 }
 
 resource "cloudflare_record" "auth_arm_002" {
-  zone_id = cloudflare_zone.xiongchenyu_dpdns_org.id
+  zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "auth"
   content = var.oracle_arm_002_ip
   type    = "A"
@@ -172,7 +172,7 @@ resource "cloudflare_record" "auth_arm_002" {
 
 
 resource "cloudflare_record" "sub2api" {
-  zone_id = cloudflare_zone.xiongchenyu_dpdns_org.id
+  zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "sub2api"
   content = var.oracle_amd_002_ip
   type    = "A"
