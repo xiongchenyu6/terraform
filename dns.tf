@@ -186,6 +186,21 @@ resource "cloudflare_record" "db_arm_002" {
   }
 }
 
+# Supabase Realtime (WebSockets) — proxied through Cloudflare, which supports
+# WS on Free. Long-lived connections; origin nginx bumps proxy_read_timeout.
+resource "cloudflare_record" "realtime_arm_002" {
+  zone_id = cloudflare_zone.panda_qzz_io.id
+  name    = "realtime"
+  content = var.oracle_arm_002_ip
+  type    = "A"
+  ttl     = 1
+  proxied = true
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 
 resource "cloudflare_record" "sub2api" {
   zone_id = cloudflare_zone.panda_qzz_io.id
