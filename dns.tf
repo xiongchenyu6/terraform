@@ -201,6 +201,22 @@ resource "cloudflare_record" "realtime_arm_002" {
   }
 }
 
+# Wildcard for per-tenant subdomain routing (realtime's Host-based tenant
+# dispatch: <external_id>.realtime.panda.qzz.io). Not available on Cloudflare
+# Free, so this record stays DNS-only.
+resource "cloudflare_record" "realtime_wildcard_arm_002" {
+  zone_id = cloudflare_zone.panda_qzz_io.id
+  name    = "*.realtime"
+  content = var.oracle_arm_002_ip
+  type    = "A"
+  ttl     = 1
+  proxied = false
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 
 resource "cloudflare_record" "sub2api" {
   zone_id = cloudflare_zone.panda_qzz_io.id
