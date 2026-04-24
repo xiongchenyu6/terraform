@@ -231,6 +231,56 @@ resource "cloudflare_record" "sub2api" {
   }
 }
 
+# Resend email setup for panda.qzz.io
+resource "cloudflare_record" "panda_resend_dkim" {
+  zone_id = cloudflare_zone.panda_qzz_io.id
+  name    = "resend._domainkey"
+  content = "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKD5wgZJUU75tlqctIv+Am5nYMt1L+FiXuxa9Htb+OlzN6O8r6hv6be56V8uu4aqBm66/2PBvYxN6tic/QK4AgGKxRcSTv5DhIlxcc0sFfU3+dXHAywPIedt4ziVOx6NfKUf4PDPhlgHzRdJwmfAqlTG8CsMbOCo3YU6ueFxFxpQIDAQAB"
+  type    = "TXT"
+  ttl     = 1
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_record" "panda_resend_mx" {
+  zone_id  = cloudflare_zone.panda_qzz_io.id
+  name     = "send"
+  content  = "feedback-smtp.ap-northeast-1.amazonses.com"
+  type     = "MX"
+  priority = 10
+  ttl      = 1
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_record" "panda_resend_spf" {
+  zone_id = cloudflare_zone.panda_qzz_io.id
+  name    = "send"
+  content = "v=spf1 include:amazonses.com ~all"
+  type    = "TXT"
+  ttl     = 1
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_record" "panda_dmarc" {
+  zone_id = cloudflare_zone.panda_qzz_io.id
+  name    = "_dmarc"
+  content = "v=DMARC1; p=none;"
+  type    = "TXT"
+  ttl     = 1
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 # Lark/Feishu mail setup for alias.autolife.ai
 resource "cloudflare_record" "alias_lark_verification" {
   zone_id = cloudflare_zone.autolife_ai.id
@@ -358,3 +408,4 @@ resource "cloudflare_record" "autolife_feishu_mx3" {
     create_before_destroy = true
   }
 }
+
