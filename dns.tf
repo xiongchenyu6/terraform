@@ -1,6 +1,6 @@
 # DNS Records for autolife.ai
 
-resource "cloudflare_record" "rust-web-server" {
+resource "cloudflare_dns_record" "rust-web-server" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "rust-web-server"
   content = var.oracle_arm_001_ip  # oracle-arm-001
@@ -13,20 +13,20 @@ resource "cloudflare_record" "rust-web-server" {
   }
 }
 
-resource "cloudflare_record" "mainpage" {
+resource "cloudflare_dns_record" "rustdesk" {
   zone_id = cloudflare_zone.autolife_ai.id
-  name    = "autolife-robotics.me"
+  name    = "rustdesk"
   content = var.oracle_arm_001_ip  # oracle-arm-001
   type    = "A"
   ttl     = 1
-  proxied = true
+  proxied = false
 
   lifecycle {
     create_before_destroy = true
   }
 }
 
-resource "cloudflare_record" "mngt" {
+resource "cloudflare_dns_record" "mngt" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "mngt"
   content = var.oracle_arm_001_ip  # oracle-arm-001
@@ -39,7 +39,7 @@ resource "cloudflare_record" "mngt" {
   }
 }
 
-resource "cloudflare_record" "netbird" {
+resource "cloudflare_dns_record" "netbird" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "netbird"
   content = var.oracle_arm_001_ip  # oracle-arm-001
@@ -52,7 +52,7 @@ resource "cloudflare_record" "netbird" {
   }
 }
 
-resource "cloudflare_record" "rust_server" {
+resource "cloudflare_dns_record" "rust_server" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "rust-server"
   content = var.oracle_arm_001_ip  # oracle-arm-001
@@ -65,7 +65,7 @@ resource "cloudflare_record" "rust_server" {
   }
 }
 
-resource "cloudflare_record" "vr_sg" {
+resource "cloudflare_dns_record" "vr_sg" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "vr-sg"
   content = var.oracle_arm_001_ip  # oracle-arm-001
@@ -78,7 +78,7 @@ resource "cloudflare_record" "vr_sg" {
   }
 }
 
-resource "cloudflare_record" "api" {
+resource "cloudflare_dns_record" "api" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "api"
   content = var.oracle_arm_001_ip  # oracle-arm-001
@@ -91,7 +91,7 @@ resource "cloudflare_record" "api" {
   }
 }
 
-resource "cloudflare_record" "odoo" {
+resource "cloudflare_dns_record" "odoo" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "odoo"
   content = var.oracle_arm_001_ip  # oracle-arm-001
@@ -103,7 +103,7 @@ resource "cloudflare_record" "odoo" {
     create_before_destroy = true
   }
 }
-resource "cloudflare_record" "casdoor" {
+resource "cloudflare_dns_record" "casdoor" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "casdoor"
   content = var.oracle_amd_001_ip  # oracle-arm-001
@@ -117,7 +117,7 @@ resource "cloudflare_record" "casdoor" {
 }
 
 
-resource "cloudflare_record" "casibase" {
+resource "cloudflare_dns_record" "casibase" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "casibase"
   content = var.oracle_amd_001_ip  # oracle-arm-001
@@ -130,7 +130,7 @@ resource "cloudflare_record" "casibase" {
   }
 }
 
-resource "cloudflare_record" "Hashtopolis" {
+resource "cloudflare_dns_record" "Hashtopolis" {
 
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "hashtopolis"
@@ -144,7 +144,7 @@ resource "cloudflare_record" "Hashtopolis" {
   }
 }
 
-resource "cloudflare_record" "api_arm_002" {
+resource "cloudflare_dns_record" "api_arm_002" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "api"
   content = var.oracle_arm_002_ip
@@ -157,7 +157,7 @@ resource "cloudflare_record" "api_arm_002" {
   }
 }
 
-resource "cloudflare_record" "auth_arm_002" {
+resource "cloudflare_dns_record" "auth_arm_002" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "auth"
   content = var.oracle_arm_002_ip
@@ -173,7 +173,7 @@ resource "cloudflare_record" "auth_arm_002" {
 # DNS-only record for direct PostgreSQL access (port 5432). Cloudflare's
 # proxy only tunnels HTTP/HTTPS on Free/Pro, so `quant` users connect here
 # rather than the proxied `api` subdomain.
-resource "cloudflare_record" "db_arm_002" {
+resource "cloudflare_dns_record" "db_arm_002" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "db"
   content = var.oracle_arm_002_ip
@@ -188,7 +188,7 @@ resource "cloudflare_record" "db_arm_002" {
 
 # Supabase Realtime (WebSockets) — proxied through Cloudflare, which supports
 # WS on Free. Long-lived connections; origin nginx bumps proxy_read_timeout.
-resource "cloudflare_record" "realtime_arm_002" {
+resource "cloudflare_dns_record" "realtime_arm_002" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "realtime"
   content = var.oracle_arm_002_ip
@@ -204,7 +204,7 @@ resource "cloudflare_record" "realtime_arm_002" {
 # Wildcard for per-tenant subdomain routing (realtime's Host-based tenant
 # dispatch: <external_id>.realtime.panda.qzz.io). Not available on Cloudflare
 # Free, so this record stays DNS-only.
-resource "cloudflare_record" "realtime_wildcard_arm_002" {
+resource "cloudflare_dns_record" "realtime_wildcard_arm_002" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "*.realtime"
   content = var.oracle_arm_002_ip
@@ -218,7 +218,7 @@ resource "cloudflare_record" "realtime_wildcard_arm_002" {
 }
 
 
-resource "cloudflare_record" "sub2api" {
+resource "cloudflare_dns_record" "sub2api" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "sub2api"
   content = var.oracle_amd_002_ip
@@ -232,7 +232,7 @@ resource "cloudflare_record" "sub2api" {
 }
 
 # Resend email setup for panda.qzz.io
-resource "cloudflare_record" "panda_resend_dkim" {
+resource "cloudflare_dns_record" "panda_resend_dkim" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "resend._domainkey"
   content = "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKD5wgZJUU75tlqctIv+Am5nYMt1L+FiXuxa9Htb+OlzN6O8r6hv6be56V8uu4aqBm66/2PBvYxN6tic/QK4AgGKxRcSTv5DhIlxcc0sFfU3+dXHAywPIedt4ziVOx6NfKUf4PDPhlgHzRdJwmfAqlTG8CsMbOCo3YU6ueFxFxpQIDAQAB"
@@ -244,7 +244,7 @@ resource "cloudflare_record" "panda_resend_dkim" {
   }
 }
 
-resource "cloudflare_record" "panda_inbound_mx" {
+resource "cloudflare_dns_record" "panda_inbound_mx" {
   zone_id  = cloudflare_zone.panda_qzz_io.id
   name     = "@"
   content  = "inbound-smtp.ap-northeast-1.amazonaws.com"
@@ -257,7 +257,7 @@ resource "cloudflare_record" "panda_inbound_mx" {
   }
 }
 
-resource "cloudflare_record" "panda_resend_mx" {
+resource "cloudflare_dns_record" "panda_resend_mx" {
   zone_id  = cloudflare_zone.panda_qzz_io.id
   name     = "send"
   content  = "feedback-smtp.ap-northeast-1.amazonses.com"
@@ -270,7 +270,7 @@ resource "cloudflare_record" "panda_resend_mx" {
   }
 }
 
-resource "cloudflare_record" "panda_resend_spf" {
+resource "cloudflare_dns_record" "panda_resend_spf" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "send"
   content = "v=spf1 include:amazonses.com ~all"
@@ -282,7 +282,7 @@ resource "cloudflare_record" "panda_resend_spf" {
   }
 }
 
-resource "cloudflare_record" "panda_dmarc" {
+resource "cloudflare_dns_record" "panda_dmarc" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "_dmarc"
   content = "v=DMARC1; p=none;"
@@ -295,7 +295,7 @@ resource "cloudflare_record" "panda_dmarc" {
 }
 
 # Lark/Feishu mail setup for alias.autolife.ai
-resource "cloudflare_record" "alias_lark_verification" {
+resource "cloudflare_dns_record" "alias_lark_verification" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "alias"
   content = "verification-code-site-App_lark=ZKksFWSiBzGrRTliptvK"
@@ -307,7 +307,7 @@ resource "cloudflare_record" "alias_lark_verification" {
   }
 }
 
-resource "cloudflare_record" "alias_lark_spf" {
+resource "cloudflare_dns_record" "alias_lark_spf" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "alias"
   content = "v=spf1 +include:spf.onlarksuite.com -all"
@@ -319,7 +319,7 @@ resource "cloudflare_record" "alias_lark_spf" {
   }
 }
 
-resource "cloudflare_record" "alias_lark_mx1" {
+resource "cloudflare_dns_record" "alias_lark_mx1" {
   zone_id  = cloudflare_zone.autolife_ai.id
   name     = "alias"
   content  = "mx1.larksuite.com"
@@ -332,7 +332,7 @@ resource "cloudflare_record" "alias_lark_mx1" {
   }
 }
 
-resource "cloudflare_record" "alias_lark_mx2" {
+resource "cloudflare_dns_record" "alias_lark_mx2" {
   zone_id  = cloudflare_zone.autolife_ai.id
   name     = "alias"
   content  = "mx2.larksuite.com"
@@ -345,7 +345,7 @@ resource "cloudflare_record" "alias_lark_mx2" {
   }
 }
 
-resource "cloudflare_record" "alias_lark_mx3" {
+resource "cloudflare_dns_record" "alias_lark_mx3" {
   zone_id  = cloudflare_zone.autolife_ai.id
   name     = "alias"
   content  = "mx3.larksuite.com"
@@ -359,7 +359,7 @@ resource "cloudflare_record" "alias_lark_mx3" {
 }
 
 # Feishu mail setup for autolife.ai (apex)
-resource "cloudflare_record" "autolife_feishu_verification" {
+resource "cloudflare_dns_record" "autolife_feishu_verification" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "@"
   content = "verification-code-site-App_feishu=rzDaOnDkZK4HUymRAE32"
@@ -371,7 +371,7 @@ resource "cloudflare_record" "autolife_feishu_verification" {
   }
 }
 
-resource "cloudflare_record" "autolife_feishu_spf" {
+resource "cloudflare_dns_record" "autolife_feishu_spf" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "@"
   content = "v=spf1 +include:_netblocks.m.feishu.cn -all"
@@ -383,7 +383,7 @@ resource "cloudflare_record" "autolife_feishu_spf" {
   }
 }
 
-resource "cloudflare_record" "autolife_feishu_mx1" {
+resource "cloudflare_dns_record" "autolife_feishu_mx1" {
   zone_id  = cloudflare_zone.autolife_ai.id
   name     = "@"
   content  = "mx1.feishu.cn"
@@ -396,7 +396,7 @@ resource "cloudflare_record" "autolife_feishu_mx1" {
   }
 }
 
-resource "cloudflare_record" "autolife_feishu_mx2" {
+resource "cloudflare_dns_record" "autolife_feishu_mx2" {
   zone_id  = cloudflare_zone.autolife_ai.id
   name     = "@"
   content  = "mx2.feishu.cn"
@@ -409,7 +409,7 @@ resource "cloudflare_record" "autolife_feishu_mx2" {
   }
 }
 
-resource "cloudflare_record" "autolife_feishu_mx3" {
+resource "cloudflare_dns_record" "autolife_feishu_mx3" {
   zone_id  = cloudflare_zone.autolife_ai.id
   name     = "@"
   content  = "mx3.feishu.cn"
