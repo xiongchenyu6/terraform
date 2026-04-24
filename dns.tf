@@ -244,6 +244,19 @@ resource "cloudflare_record" "panda_resend_dkim" {
   }
 }
 
+resource "cloudflare_record" "panda_inbound_mx" {
+  zone_id  = cloudflare_zone.panda_qzz_io.id
+  name     = "@"
+  content  = "inbound-smtp.ap-northeast-1.amazonaws.com"
+  type     = "MX"
+  priority = 10
+  ttl      = 1
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "cloudflare_record" "panda_resend_mx" {
   zone_id  = cloudflare_zone.panda_qzz_io.id
   name     = "send"
