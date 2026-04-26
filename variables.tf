@@ -40,3 +40,45 @@ variable "tcloud_ip" {
   type        = string
   default     = "43.156.66.157"
 }
+
+variable "tcloud_sh_ip" {
+  description = "Tencent Cloud Shanghai server IP (tcloud-sh)"
+  type        = string
+  default     = "43.139.62.96"
+}
+
+variable "game_ip" {
+  description = "Game server IP (game)"
+  type        = string
+  default     = "172.22.240.99"
+}
+
+variable "gz_office_ip" {
+  description = "Guangzhou office server IP (gz-office, port 2222, user autolife)"
+  type        = string
+  default     = "183.6.107.47"
+}
+
+variable "lubancat_ip" {
+  description = "Lubancat server IP (lubancat, user root)"
+  type        = string
+  default     = "203.116.95.146"
+}
+
+variable "office_ip" {
+  description = "Office server IP (office)"
+  type        = string
+  default     = "172.22.240.98"
+}
+
+variable "sg_office_ip" {
+  description = "Singapore office server IP (sg-office)"
+  type        = string
+  default     = "101.78.126.6"
+}
+
+variable "sz_office_ip" {
+  description = "Shenzhen office server IP (sz-office, port 2222, user autolife)"
+  type        = string
+  default     = "113.90.155.31"
+}

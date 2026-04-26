@@ -5,13 +5,6 @@ resource "cloudflare_zone" "autolife_ai" {
   name = "autolife.ai"
 }
 
-resource "cloudflare_zone" "autolife_dpdns_org" {
-  account = {
-    id = var.cloudflare_account_id
-  }
-  name = "autolife.dpdns.org"
-}
-
 resource "cloudflare_zone" "xiongchenyu_dpdns_org" {
   account = {
     id = var.cloudflare_account_id
@@ -19,16 +12,26 @@ resource "cloudflare_zone" "xiongchenyu_dpdns_org" {
   name = "xiongchenyu.dpdns.org"
 }
 
-resource "cloudflare_zone" "lovai_eu_org" {
-  account = {
-    id = var.cloudflare_account_id
-  }
-  name = "lovai.eu.org"
-}
-
 resource "cloudflare_zone" "panda_qzz_io" {
   account = {
     id = var.cloudflare_account_id
   }
   name = "panda.qzz.io"
+}
+
+# Zones no longer exist in Cloudflare; clear from state without a destroy API call.
+removed {
+  from = cloudflare_zone.lovai_eu_org
+
+  lifecycle {
+    destroy = false
+  }
+}
+
+removed {
+  from = cloudflare_zone.autolife_dpdns_org
+
+  lifecycle {
+    destroy = false
+  }
 }

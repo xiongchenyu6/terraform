@@ -1,5 +1,20 @@
 # DNS Records for autolife.ai
 
+
+resource "cloudflare_dns_record" "comfy" {
+  zone_id = cloudflare_zone.autolife_ai.id
+  name    = "comfy"
+  content = var.oracle_arm_001_ip  # oracle-arm-001
+  type    = "A"
+  ttl     = 1
+  proxied = false
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+
 resource "cloudflare_dns_record" "rust-web-server" {
   zone_id = cloudflare_zone.autolife_ai.id
   name    = "rust-web-server"
@@ -103,10 +118,37 @@ resource "cloudflare_dns_record" "odoo" {
     create_before_destroy = true
   }
 }
+
+resource "cloudflare_dns_record" "gz_wildcard" {
+  zone_id = cloudflare_zone.autolife_ai.id
+  name    = "*.gz"
+  content = var.gz_office_ip
+  type    = "A"
+  ttl     = 1
+  proxied = false
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "cloudflare_dns_record" "casdoor" {
-  zone_id = cloudflare_zone.panda_qzz_io.id
+  zone_id = cloudflare_zone.autolife_ai.id
   name    = "casdoor"
-  content = var.oracle_amd_001_ip  # oracle-arm-001
+  content = var.tcloud_sh_ip
+  type    = "A"
+  ttl     = 1
+  proxied = false
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "cloudflare_dns_record" "casibase" {
+  zone_id = cloudflare_zone.panda_qzz_io.id
+  name    = "casibase"
+  content = var.gz_office_ip
   type    = "A"
   ttl     = 1
   proxied = true
@@ -116,11 +158,10 @@ resource "cloudflare_dns_record" "casdoor" {
   }
 }
 
-
-resource "cloudflare_dns_record" "casibase" {
+resource "cloudflare_dns_record" "wgmesh" {
   zone_id = cloudflare_zone.panda_qzz_io.id
-  name    = "casibase"
-  content = var.oracle_amd_001_ip  # oracle-arm-001
+  name    = "wgmesh"
+  content = var.oracle_amd_002_ip  # oracle-arm-001
   type    = "A"
   ttl     = 1
   proxied = true
