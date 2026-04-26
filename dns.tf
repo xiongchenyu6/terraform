@@ -130,6 +130,19 @@ resource "cloudflare_dns_record" "casibase" {
   }
 }
 
+resource "cloudflare_dns_record" "wgmesh" {
+  zone_id = cloudflare_zone.panda_qzz_io.id
+  name    = "wgmesh"
+  content = var.oracle_amd_002_ip  # oracle-arm-001
+  type    = "A"
+  ttl     = 1
+  proxied = true
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "cloudflare_dns_record" "Hashtopolis" {
 
   zone_id = cloudflare_zone.panda_qzz_io.id
