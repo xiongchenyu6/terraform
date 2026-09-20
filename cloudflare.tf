@@ -264,8 +264,8 @@ resource "cloudflare_dns_record" "hy2_lubancat" {
 # Worker 脚本本身由 wrangler 部署(~/Downloads/karing-hy2/sub-worker),
 # token 鉴权在脚本内;这里只做自定义域绑定,CF 自动签边缘证书 + 建 DNS。
 resource "cloudflare_workers_custom_domain" "sub" {
-  account_id  = var.cloudflare_account_id
-  zone_id     = cloudflare_zone.panda_qzz_io.id
-  hostname    = "sub.panda.qzz.io"
-  service     = "autolife-sub"
+  account_id = var.cloudflare_account_id
+  zone_id    = cloudflare_zone.panda_qzz_io.id
+  hostname   = "sub.panda.qzz.io"
+  service    = "autolife-sub"
 }
