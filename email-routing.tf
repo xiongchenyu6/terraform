@@ -1,6 +1,5 @@
 resource "cloudflare_email_routing_dns" "autonto" {
   zone_id = cloudflare_zone.autonto_dpdns_org.id
-  name    = cloudflare_zone.autonto_dpdns_org.name
 }
 
 resource "cloudflare_email_routing_address" "autonto" {
