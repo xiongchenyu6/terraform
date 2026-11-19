@@ -1,9 +1,3 @@
-variable "autonto_email_forward_to" {
-  description = "Verified destination inbox for xiongchenyu@autonto.dpdns.org."
-  type        = string
-  sensitive   = true
-}
-
 resource "cloudflare_email_routing_dns" "autonto" {
   zone_id = cloudflare_zone.autonto_dpdns_org.id
   name    = cloudflare_zone.autonto_dpdns_org.name
@@ -11,7 +5,7 @@ resource "cloudflare_email_routing_dns" "autonto" {
 
 resource "cloudflare_email_routing_address" "autonto" {
   account_id = var.cloudflare_account_id
-  email      = var.autonto_email_forward_to
+  email      = "xiongchenyu6@gmail.com"
 }
 
 resource "cloudflare_email_routing_rule" "autonto_xiongchenyu" {
