@@ -14,6 +14,13 @@ resource "cloudflare_zone" "boob_qzz_io" {
   name = "boob.qzz.io"
 }
 
+resource "cloudflare_zone" "autonto_dpdns_org" {
+  account = {
+    id = var.cloudflare_account_id
+  }
+  name = "autonto.dpdns.org"
+}
+
 resource "cloudflare_dns_record" "casibase" {
   zone_id = cloudflare_zone.panda_qzz_io.id
   name    = "casibase"
